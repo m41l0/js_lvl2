@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 01</title>
+    <script>
+        // создаем объект
+        var user = {
+            name: 'Maks',
+            age: 34,
+            go: function (h) {
+                console.log('Пройдено', h, 'метров');
+                return 'ok';
+            }
+        };
+
+        console.log(user);
+        console.log(user.age, user.name);
+        console.log(user.go);
+        console.log(user.go(200));
+
+        // создаем класс
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+
+            var email = '1@2.ru';
+
+            // создаем метод
+            function show() {
+                console.log('Информация о пользователе:', email, this.name, this.age);
+            }
+
+            // чтобы можно было использвать метод, открываем его наружу
+            this.show = show;
+
+            // а можно так записать:
+//            this.show = function () {
+//                console.log('Информация о пользователе:', email, this.name, this.age);
+//            }
+        }
+
+        var person1 = new Person('Nik', 67);
+        console.log(person1, person1.name, person1.age);
+        person1.show();
+
+        var person2 = new Person('Jhon', 44);
+        console.log(person2, person2.name, person2.age);
+        person2.show();
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <script>
+        // создаем базовый класс 'Container', от которого все элементы будут наследоваться
+        function Container() {
+            this.id = '';
+            this.className = '';
+            this.htmlCode = '';
+        }
+
+        // добавляем метод 'render', кторый будет выводить html код
+        Container.prototype.render = function () {
+            return this.htmlCode;
+        };
+
+        // создаем класс 'menu'
+        function Menu(myId, myClass, myItems) {
+            // наследуем всё от базового класса 'Container'
+            Container.call(this);
+            // переопределяем свойства
+            this.id = myId;
+            this.className = myClass;
+            // и определяем myItems
+            this.items = myItems;
+        }
+
+        // далее необходимо полноценно отнаследоваться от базового класса 'Container'
+        Menu.prototype = Object.create(Container.prototype);
+        // обратно возвращаем конструктор
+        Menu.prototype.constructor = Menu;
+
+        // далее нужно еще метод 'render' добавить
+        Menu.prototype.render = function () {
+            var res = '<ul class="' + this.className + '">';
+
+            // перебираем items (пункты меню)
+            for (var item in this.items) {
+                // на каждой итерации проверяем пункт ли это меню или нет, и, если да - вызываем метод 'render'
+                if (this.items[item] instanceof MenuItem) {
+                    res += this.items[item].render();
+                }
+            }
+            // закрываем список ul
+            res += '</ul>';
+            // возвращаем результат
+            return res;
+        };
+
+        // создаем класс 'MenuItem' - пункт меню
+        function MenuItem(myHref, myName) {
+            // наследуемся от базового класса 'Container'is
+            Container.call(this);
+            // переопределяем 'className', прописываем стандартный класс
+            this.className = 'menu-item';
+            this.href = myHref;
+            this.name = myName;
+        }
+
+        // далле завершаем наследование
+        MenuItem.prototype = Object.create(Container.prototype);
+        // обратно возвращаем конструктор
+        MenuItem.prototype.constructor = MenuItem;
+        
+        // и также метод 'render' нам сюда понадобится
+        MenuItem.prototype.render = function () {
+            return '<li><a href="' + this.href + '">' + this.name + '</a></li>';
+        };
+
+
+        // содаем меню
+        var menu = new Menu('my_menu', 'my_menu', [
+            new MenuItem('/', 'Главная'),
+            new MenuItem('/about', 'О нас'),
+            new MenuItem('/contacts', 'Контакты')
+        ])
+    </script>
+</head>
+<body>
+<script>
+    document.write(menu.render());
+</script>
+</body>
+</html>

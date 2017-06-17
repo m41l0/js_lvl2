@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6</title>
+    <script>
+        'use strict';
+
+        // создаем класс
+        class BasePerson {
+            constructor(name) {
+                this.name = name;
+            }
+
+            run() {
+                console.log('BasePerson::run()');
+                return 1;
+            }
+        }
+
+        // наследуем класс
+        class Person extends BasePerson {
+            constructor(name, age) {
+                // наслдеовние свойств из конструктора родительского класса
+                super(name);
+                // свойства текущего класса
+                this.age = age;
+            }
+
+            // пользовательский метод
+            show() {
+                console.log('show()', this.name);
+                return 1;
+            }
+        }
+
+        let p1 = new Person('Maksim', 34);
+        console.log(p1, p1.show(), p1.age, p1.run());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 01_2</title>
+    <script>
+        // создаем класс 'BasePerson'
+        function BasePerson(name) {
+            this.name = name;
+            this.title = 'По умолчанию';
+        }
+
+        // создаем метод, который будет общим
+        BasePerson.prototype.run = function () {
+            console.log('BasePerson.prototype.run');
+        };
+
+        // создаем класс 'Student'
+        function Student(name, course) {
+            // наследование свойств
+            BasePerson.call(this, name);
+            // т.к. свое свойство (новое), то присваиваем
+            this.course = course;
+        }
+
+        // наследуем прототип от родительского класса
+        Student.prototype = Object.create(BasePerson.prototype);
+        // т.к. перетерли порототип полностью, то нужно вернуть конструктор
+        Student.prototype.constructor = Student;
+
+        // создаем метод
+        Student.prototype.show = function () {
+            console.log(this.name, this.course);
+        };
+        
+        var student1 = new Student('Olga', '2nd course');
+        student1.show();
+        student1.run();
+        console.log(student1);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

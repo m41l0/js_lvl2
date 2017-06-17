@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <script>
+        'use strict';
+
+        // создаем базовый класс 'Container', от которого все элементы будут наследоваться
+        class Container {
+            constructor() {
+                this.id = '';
+                this.className = '';
+                this.htmlCode = '';
+            }
+
+            // добавляем метод 'render', кторый будет выводить html код
+            render() {
+                return this.htmlCode;
+            };
+        }
+
+        // создаем класс 'menu'
+        class Menu extends Container {
+            constructor(myId, myClass, myItems) {
+                // наследуем всё от базового класса 'Container'
+                super(myId, myClass, myItems);
+                // переопределяем свойства
+                this.id = myId;
+                this.className = myClass;
+                // и определяем myItems
+                this.items = myItems;
+            }
+
+            // далее нужно еще метод 'render' добавить
+            render() {
+                var res = '<ul class="' + this.className + '">';
+
+                // перебираем items (пункты меню)
+                for (var item in this.items) {
+                    // на каждой итерации проверяем пункт ли это меню или нет, и, если да - вызываем метод 'render'
+                    if (this.items[item] instanceof MenuItem) {
+                        res += this.items[item].render();
+                    }
+                }
+                // закрываем список ul
+                res += '</ul>';
+                // возвращаем результат
+                return res;
+            };
+        }
+
+        // создаем класс 'MenuItem' - пункт меню
+        class MenuItem extends Container {
+            constructor(myHref, myName) {
+                // наследуемся от базового класса 'Container'is
+                super(myHref, myName);
+                // переопределяем 'className', прописываем стандартный класс
+                this.className = 'menu-item';
+                // и определяем myHref и myName
+                this.href = myHref;
+                this.name = myName;
+            }
+
+            // и также метод 'render' нам сюда понадобится
+            render() {
+                return '<li><a href="' + this.href + '">' + this.name + '</a></li>';
+            };
+        }
+
+        // содаем меню
+        var menu = new Menu('my_menu', 'my_menu', [
+            new MenuItem('/', 'Главная'),
+            new MenuItem('/about', 'О нас'),
+            new MenuItem('/contacts', 'Контакты')
+        ]);
+    </script>
+</head>
+<body>
+<script>
+    document.write(menu.render());
+</script>
+</body>
+</html>
