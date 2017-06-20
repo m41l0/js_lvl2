@@ -56,10 +56,10 @@
         };
 
         // добавляем метод 'remove' в класс 'Menu' для удаления пункта меню
-/*        Menu.prototype.remove = function (n) {
-            var itemToDel = document.getElementById(this.items[n].id);
-            itemToDel.remove();
-        };*/
+        /*        Menu.prototype.remove = function (n) {
+         var itemToDel = document.getElementById(this.items[n].id);
+         itemToDel.remove();
+         };*/
 
         // создаем класс 'MenuItem' - пункт меню
         function MenuItem(myHref, myTitle, myId) {
@@ -76,10 +76,37 @@
         MenuItem.prototype = Object.create(Container.prototype);
         // обратно возвращаем конструктор
         MenuItem.prototype.constructor = MenuItem;
-        
+
         // и также метод 'render' нам сюда понадобится
         MenuItem.prototype.render = function () {
             res = '<li id="' + this.id + '"><a href="' + this.href + '">' + this.name + '</a></li>';
+            return res;
+        };
+
+        // создаем наслденика класса 'Menu'
+        function MenuExtended(myId, myClass, myItems) {
+            Menu.call(this);
+            this.id = myId;
+            this.className = myClass;
+            this.items = myItems;
+        }
+
+        MenuExtended.prototype = Object.create(Menu.prototype);
+        MenuExtended.prototype.constructor = MenuExtended;
+
+        MenuExtended.prototype.render = function () {
+            var res = '<ul id = "' + this.id + '" class="' + this.className + '">';
+
+            // перебираем items (пункты меню)
+            for (var item in this.items) {
+                // на каждой итерации проверяем пункт ли это меню, и, если да - вызываем метод 'render'
+                if (this.items[item] instanceof MenuItem) {
+                    res += this.items[item].render();
+                }
+            }
+            // закрываем список ul
+            res += '</ul>';
+            // возвращаем результат
             return res;
         };
 
@@ -89,20 +116,32 @@
             new MenuItem('/about', 'О нас', 'menu_item_02'),
             new MenuItem('/contacts', 'Контакты', 'menu_item_03')
         ]);
+
+        var menuExt = new MenuExtended('my_menu0', 'my_menu1', [
+            new MenuItem('/', ['Main', 'Вложенное меню'], '01'),
+            new MenuItem('/about', 'About', '02'),
+            new MenuItem('/contacts', 'Contacts', '03')
+        ]);
+        console.log(menuExt);
     </script>
 </head>
 <body>
 <script>
-//    console.log(menu);
+    //    console.log(menu);
     var div = document.createElement('div');
     document.body.appendChild(div);
     div.innerHTML = menu.render();
 
+    var div2 = document.createElement('div');
+    document.body.appendChild(div2);
+    div2.innerHTML = menuExt.render();
+
+
     // удаляем контейнер
-    menu.remove();
+    //    menu.remove();
 
     // удаляем 2-й пункт меню
-//    menu.remove(1);
+    //    menu.remove(1);
 
 </script>
 </body>
