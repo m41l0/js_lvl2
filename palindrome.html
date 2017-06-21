@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Palindrome</title>
+    <script>
+//       function isPalindrome(s){
+//           var s = s.replace(/[^A-Z0-9]+/ig, '').toLowerCase();
+//           return s == s.split('').reverse().join('');
+//        }
+
+//        function isPalindrome(s) {
+//            s=s.replace(/\W/g,'').toLowerCase();
+//            return s==s.split('').reverse().join('');
+//        }
+
+        function isPalindrome(s){s=s.replace(/\W/g,'').toLowerCase();return s==s.split('').reverse().join('')}
+
+//        function isPalindrome(str){
+//            return str.replace(/[^A-Z0-9]/ig, "").toLowerCase() === str.replace(/[^A-Z0-9]/ig, "").toLowerCase().split('').reverse().join('');
+//        }
+
+        console.log(isPalindrome('level')); // logs 'true'
+        console.log(isPalindrome('levels')); // logs 'false'
+        console.log(isPalindrome('A car, a man, a maraca')); // logs 'true'
+    </script>
+</head>
+<body>
+
+</body>
+</html>
