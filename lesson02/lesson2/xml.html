@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа с XML</title>
+    <script>
+        window.onload = function () {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', './data.xml', false);
+            xhr.send();
+
+            if (xhr.status != 200) {
+                console.log('Error', xhr.status, xhr.statusText);
+            } else {
+                console.log('ok', xhr.responseText);
+                var xml = xhr.responseXML;
+                //console.log(xml);
+                var text = xml.getElementsByTagName('myanswer').item(0);
+                console.log(text.firstChild.data);
+                var div = document.createElement('div');
+                div.innerText = 'Данные получены AJAX: ' + text.firstChild.data;
+                document.body.appendChild(div);
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

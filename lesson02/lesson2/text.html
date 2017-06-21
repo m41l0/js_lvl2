@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text</title>
+    <script>
+        window.onload = function () {
+            var i1 = document.getElementById('i1');
+            var i2 = document.getElementById('i2');
+            var btn = document.getElementById('btn');
+
+            var info = [
+                {
+                    rus: 'Собака',
+                    eng: 'Dog'
+                }
+            ];
+
+            var translate = 'Не удалось перевести';
+
+            btn.addEventListener('click', function () {
+               var value = i1.value;
+
+               for (var i = 0; i < info.length; i++)
+               {
+                   if(info[i].rus == value){
+                       translate = info[i].eng;
+                   }
+               }
+
+               i2.value = translate;
+            });
+        }
+    </script>
+</head>
+<body>
+<input type="text" id="i1">
+<input type="text" id="i2">
+<button id="btn">Go</button>
+</body>
+</html>

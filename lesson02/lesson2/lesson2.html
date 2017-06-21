@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson2</title>
+    <script>
+        var userJson = '{"name": "Olga", "age": 25, "isMale": false}';
+        var user = JSON.parse(userJson);
+        console.log(user);
+        console.log(user.name, user.age, user.isMale);
+
+        user.frends = [
+            'Anna',
+            'Ilya'
+        ];
+
+        user.address = {
+            city: 'Moscow',
+            postalCode: '000000',
+            street: 'Butovskay Street'
+        };
+
+        user.date = '2017-06-20';
+
+        console.log(user);
+
+        var jsonFromUser = JSON.stringify(user, null, 4);
+
+        console.log(jsonFromUser);
+
+        var userNew = JSON.parse(jsonFromUser, function (key, value) {
+            //console.log('!', key, value);
+            return (key == 'date') ? new Date(value) : value;
+        });
+
+        console.log(userNew.date, userNew.date.getDate());
+
+        //AJAX
+        //Синхронный запрос
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', './data.json', false);
+        xhr.send();
+
+        if(xhr.status != 200)
+        {
+            console.log('Error', xhr.status, xhr.statusText);
+        } else {
+            console.log('ok', xhr.responseText);
+            var myTel = JSON.parse(xhr.responseText);
+            console.log(myTel.tel, myTel.title);
+        }
+
+        //Ассинхронный запрос
+        console.log('---Async---');
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open('GET', './data.json', true);
+        xhr2.send();
+
+        xhr2.onreadystatechange = function () {
+            if(xhr2.readyState !=4) return;
+            //xhr2.readyState
+            //0 - запрос не инициализирован
+            //1 - загрузка
+            //2 - запрос принят
+            //3 - идет обмен данными
+            //4 - запрос выполнен
+
+            if(xhr2.status != 200){
+                console.log('Error', xhr2.status, xhr2.statusText);
+            } else {
+                console.log('ok', xhr2.responseText);
+                var myTel = JSON.parse(xhr2.responseText);
+                console.log(myTel.tel, myTel.title);
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
