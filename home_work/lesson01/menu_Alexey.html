@@ -21,7 +21,7 @@
             // метод для удаления меню по id
             Container.prototype.remove = function () {
                 var itemToDel = document.getElementById(this.id);
-//                itemToDel.remove();
+//            itemToDel.remove();
                 itemToDel.parentNode.removeChild(itemToDel);
             };
 
@@ -50,55 +50,7 @@
                     // на каждой итерации проверяем пункт ли это меню, и, если да - вызываем метод 'render'
                     if (this.items[item] instanceof MenuItem) {
                         res += this.items[item].render();
-                    }
-                }
-                // закрываем список ul
-                res += '</ul>';
-                // возвращаем результат
-                return res;
-            };
-
-            // создаем класс 'MenuItem' - пункт меню
-            function MenuItem(myHref, myTitle) {
-                // наследуемся от базового класса 'Container'
-                Container.call(this);
-                // переопределяем 'className', прописываем стандартный класс
-                this.className = 'menu-item';
-                this.href = myHref;
-                this.name = myTitle;
-            }
-
-            // далее завершаем наследование
-            MenuItem.prototype = Object.create(Container.prototype);
-            // обратно возвращаем конструктор
-            MenuItem.prototype.constructor = MenuItem;
-
-            // и также метод 'render' нам сюда понадобится
-            MenuItem.prototype.render = function () {
-                res = '<li><a href="' + this.href + '">' + this.name + '</a></li>';
-                return res;
-            };
-
-            // создаем наслденика класса 'Menu'
-            function SubMenu(myId, myClass, myItems) {
-                Menu.call(this);
-                this.id = myId;
-                this.className = myClass;
-                this.items = myItems;
-            }
-
-            SubMenu.prototype = Object.create(Menu.prototype);
-            SubMenu.prototype.constructor = SubMenu;
-
-            SubMenu.prototype.render = function () {
-                var res = '<ul id = "' + this.id + '" class="' + this.className + '">';
-
-                // перебираем items (пункты меню)
-                for (var item in this.items) {
-                    // на каждой итерации проверяем пункт ли это меню, и, если да - вызываем метод 'render'
-                    if (this.items[item] instanceof MenuItem) {
-                        res += this.items[item].render();
-                    } else if (this.items[item] instanceof SubMenu) {
+                    } else if (this.items[item] instanceof MenuSubItem) {
                         res += '<li>';
                         res += this.items[item].render();
                         res += '</li>';
@@ -110,46 +62,63 @@
                 return res;
             };
 
+            // создаем класс 'MenuItem' - пункт меню
+            function MenuItem(myHref, myName) {
+                // наследуемся от базового класса 'Container'
+                Container.call(this);
+                // переопределяем 'className', прописываем стандартный класс
+                this.className = 'menu-item';
+                this.href = myHref;
+                this.name = myName;
+            }
+
+            // далее завершаем наследование
+            MenuItem.prototype = Object.create(Container.prototype);
+            // обратно возвращаем конструктор
+            MenuItem.prototype.constructor = MenuItem;
+
+            // и также метод 'render' нам сюда понадобится
+            MenuItem.prototype.render = function () {
+                return '<li><a href="' + this.href + '">' + this.name + '</a></li>';
+            };
+
+            // создаем наслденика класса 'Menu'
+            function MenuSubItem(myId, myClass, myItems) {
+                Menu.call(this);
+                this.id = myId;
+                this.className = myClass;
+                this.items = myItems;
+            }
+
+            MenuSubItem.prototype = Object.create(Menu.prototype);
+            MenuSubItem.prototype.constructor = MenuSubItem;
+
             // содаем меню
             var menu = new Menu('my_menu', 'my_menu', [
                 new MenuItem('/', 'Главная'),
                 new MenuItem('/about', 'О нас'),
                 new MenuItem('/contacts', 'Контакты'),
-                new MenuItem('/coords', 'Наши координаты')
-            ]);
-
-            // содаем меню с подменю
-            var menuWithSubmenu = new SubMenu('my_menu', 'my_menu', [
-                new MenuItem('/', 'Главная'),
-                new MenuItem('/about', 'О нас'),
-                new MenuItem('/contacts', 'Контакты'),
-                new SubMenu('aaa', 'bbb', [
+                new MenuSubItem('aaa', 'bbb', [
                     new MenuItem('/sub1', 'Sub1'),
                     new MenuItem('/sub2', 'Sub2')
                 ]),
-                new MenuItem('/coords', 'Наши координаты')
+                new MenuItem('/data', 'Data')
             ]);
 
-            // создаем элемент 'div'
-            var div = document.createElement('div');
-            document.body.appendChild(div);
 
-            // вешаем обработчики кликов на кнопки
+            var nav = document.querySelector('nav');
             document.getElementById('render').addEventListener('click', function () {
-                div.innerHTML = hw_menu.render();
-            });
-            document.getElementById('renderMenuWithSubMenu').addEventListener('click', function () {
-                div.innerHTML = menuWithSubmenu.render();
+                nav.innerHTML = menu.render();
             });
             document.getElementById('remove').addEventListener('click', function () {
-                hw_menu.remove();
+                menu.remove();
             });
         }
     </script>
 </head>
 <body>
-<button id="render">Добавить контейнер Меню</button>
-<button id="renderMenuWithSubMenu">Добавить контейнер Меню с подменю</button>
-<button id="remove">Удалить конейнер Меню</button>
+<nav></nav>
+<button id="render">Render</button>
+<button id="remove">Remove</button>
 </body>
 </html>
