@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <script>
+        function Container() {
+            this.id = '';
+            this.className = '';
+            this.htmlCode = '';
+        }
+
+        Container.prototype.render = function () {
+            return this.htmlCode;
+        };
+
+        function Menu(myId, myClass, myItems) {
+            Container.call(this);
+            this.id = myId;
+            this.className = myClass;
+            this.items = myItems;
+        }
+
+        Menu.prototype = Object.create(Container.prototype);
+        Menu.prototype.constructor = Menu;
+
+        Menu.prototype.render = function () {
+            var res = '<ul class="'+this.className+'">';
+
+            for (var item in this.items)
+            {
+                if(this.items[item] instanceof MenuItem){
+                    res += this.items[item].render();
+                }
+            }
+            res += '</ul>';
+            return res;
+        };
+
+        function MenuItem(myHref, myName) {
+            Container.call(this);
+            this.className = 'menu-item';
+            this.href = myHref;
+            this.name = myName;
+        }
+
+        MenuItem.prototype = Object.create(Container.prototype);
+        MenuItem.prototype.constructor = MenuItem;
+
+        MenuItem.prototype.render = function () {
+            return '<li><a href="'+this.href+'">'+this.name+'</a></li>';
+        };
+
+
+        var menu = new Menu('my_menu', 'my_menu', [
+            new MenuItem('/', 'Главная'),
+            new MenuItem('/about/', 'О нас'),
+            new MenuItem('/contacts', 'Контакты'),
+        ])
+    </script>
+</head>
+<body>
+<script>
+    document.write(menu.render());
+</script>
+</body>
+</html>

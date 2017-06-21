@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 1</title>
+    <script>
+        var user = {
+            name: 'Igor',
+            age: 25,
+            go: function (h) {
+                console.log('Go! Пройдено', h, 'м.');
+                console.log('Go! Пройдено ' + h + 'м.');
+                return 'ok';
+            }
+        };
+
+        console.log(user);
+        console.log(user.age, user.name);
+        console.log(user.go);
+        console.log(user.go(200));
+
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+
+            var email = '1@2.ru';
+            this.email = 'none';
+
+            function show() {
+                console.log('Информация о пользователе:', email, this.name, this.age)
+            }
+
+            this.show = show;
+        }
+
+
+        var person1 = new Person('Ig', 25);
+        console.log(person1, person1.name, person1.age);
+        person1.show();
+
+        var person2 = new Person('Ilya', 27);
+        console.log(person2, person2.name);
+        person2.show();
+
+
+        var str = 'user';
+
+        console.log(str, str.toUpperCase());
+
+
+        function BasePerson(name) {
+            this.name = name;
+            this.title = 'По умолчанию';
+        }
+
+        BasePerson.prototype.run = function () {
+            console.log('BasePerson.prototype.run');
+        };
+
+        function Student(name, course) {
+            BasePerson.call(this, name);
+            this.course = course;
+        }
+
+        Student.prototype = Object.create(BasePerson.prototype);
+        Student.prototype.constructor = Student;
+
+        Student.prototype.show = function () {
+            console.log(this.name, this.course);
+        };
+
+        var student1 = new Student('Olga', '1 Курс');
+        student1.show();
+        student1.run();
+        console.log(student1);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

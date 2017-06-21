@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6</title>
+    <script>
+        'use strict';
+
+        class BasePerson {
+            constructor(name) {
+                this.name = name;
+            }
+
+            run(){
+                console.log('BasePerson::run()');
+                return 1;
+            }
+        }
+
+        class Person extends BasePerson{
+            constructor(name, age) {
+                super(name);
+                this.age = age;
+            }
+
+            show() {
+                console.log('show()', this.name);
+                return 1;
+            }
+        }
+
+        var p1 = new Person('Igor', 25);
+        console.log(p1, p1.show(), p1.age, p1.run());
+    </script>
+</head>
+<body>
+
+</body>
+</html>
