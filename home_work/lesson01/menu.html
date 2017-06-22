@@ -136,13 +136,13 @@
 
             // вешаем обработчики кликов на кнопки
             document.getElementById('render').addEventListener('click', function () {
-                div.innerHTML = hw_menu.render();
+                div.innerHTML = menu.render();
             });
             document.getElementById('renderMenuWithSubMenu').addEventListener('click', function () {
                 div.innerHTML = menuWithSubmenu.render();
             });
             document.getElementById('remove').addEventListener('click', function () {
-                hw_menu.remove();
+                menu.remove();
             });
         }
     </script>
