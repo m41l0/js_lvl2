@@ -1,0 +1,15 @@
+[
+  {"href": "/", "title": "Main"},
+  {"href": "/about", "title": "About", "items": [
+    {"href": "/sub1", "title":"SUB1"},
+    {"href": "/sub2", "title":"SUB2"},
+    {"href": "/sub3", "title":"SUB3", "items": [
+      {"href": "/subA", "title":"SubA"},
+      {"href": "/subb", "title":"SubB"}
+       ]}
+  ]},
+  {"href": "/contacts", "title":"Contacts", "items": [
+    {"href": "/manager", "title":"Manager"},
+    {"href": "/hr", "title":"HR"}
+  ]}
+]
