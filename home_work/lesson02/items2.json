@@ -1,0 +1,56 @@
+{
+  "id": "my_menu",
+  "className": "my_menu",
+  "htmlCode": "",
+  "items": [
+    {
+      "id": "",
+      "className": "menu-item",
+      "htmlCode": "",
+      "href": "/",
+      "name": "Главная"
+    },
+    {
+      "id": "",
+      "className": "menu-item",
+      "htmlCode": "",
+      "href": "/about",
+      "name": "О нас"
+    },
+    {
+      "id": "",
+      "className": "menu-item",
+      "htmlCode": "",
+      "href": "/contacts",
+      "name": "Контакты"
+    },
+    {
+      "id": "aaa",
+      "className": "bbb",
+      "htmlCode": "",
+      "items": [
+        {
+          "id": "",
+          "className": "menu-item",
+          "htmlCode": "",
+          "href": "/sub1",
+          "name": "Sub1"
+        },
+        {
+          "id": "",
+          "className": "menu-item",
+          "htmlCode": "",
+          "href": "/sub2",
+          "name": "Sub2"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "className": "menu-item",
+      "htmlCode": "",
+      "href": "/coords",
+      "name": "Наши координаты"
+    }
+  ]
+}

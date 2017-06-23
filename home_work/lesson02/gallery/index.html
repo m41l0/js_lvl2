@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Магазин</title>
+    <style>
+        figure {
+            background: #d9dabb; /* Цвет фона */
+            display: block; /* Блочный элемент */
+            width: 100px; /* Ширина */
+            height: 100px; /* Высота */
+            float: left; /* Блоки выстраиваются по горизонтали */
+            margin: 0 10px 10px 0; /* Отступы */
+            text-align: center; /* Выравнивание по центру */
+        }
+        figure img {
+            border: 2px solid #8b8e4b; /* Параметры рамки */
+        }
+        figure p {
+            margin-bottom: 0; /* Отступ снизу */
+        }
+    </style>
+    <!--<link rel="stylesheet" href="./css/style.css">-->
+    <script>
+        window.onload = function () {
+
+            // создаем базовый класс 'Container'
+            function Container() {
+                this.id = '';
+                this.className = '';
+                this.htmlCode = '';
+            }
+
+            // добавляем метод 'render', кторый будет выводить html код
+            Container.prototype.render = function () {
+                return this.htmlCode;
+            };
+
+            // метод для удаления меню по id
+            Container.prototype.remove = function () {
+                var itemToDel = document.getElementById(this.id);
+                itemToDel.remove();
+            };
+
+            // создаем класс 'Menu'
+            function Menu(myId, myClass, myItems) {
+                // наследуем всё от базового класса 'Container'
+                Container.call(this);
+                // переопределяем свойства
+                this.id = myId;
+                this.className = myClass;
+                // и определяем myItems
+                this.items = myItems;
+            }
+
+            // далее необходимо полноценно отнаследоваться от базового класса 'Container'
+            Menu.prototype = Object.create(Container.prototype);
+            // обратно возвращаем конструктор
+            Menu.prototype.constructor = Menu;
+
+            // добавляем метод 'render'
+            Menu.prototype.render = function () {
+                var res = '<ul id = "' + this.id + '" class="' + this.className + '">';
+
+                // перебираем items (пункты меню)
+                for (var item in this.items) {
+                    // на каждой итерации проверяем пункт ли это меню, и, если да - вызываем метод 'render'
+                    if (this.items[item] instanceof MenuItem) {
+                        res += this.items[item].render();
+                    }
+                }
+                // закрываем список ul
+                res += '</ul>';
+                // возвращаем результат
+                return res;
+            };
+
+            // создаем класс 'MenuItem' - пункт меню
+            function MenuItem(myHref, myTitle) {
+                // наследуемся от базового класса 'Container'
+                Container.call(this);
+                // переопределяем 'className', прописываем стандартный класс
+                this.className = 'menu-item';
+                this.href = myHref;
+                this.name = myTitle;
+            }
+
+            // далее завершаем наследование
+            MenuItem.prototype = Object.create(Container.prototype);
+            // обратно возвращаем конструктор
+            MenuItem.prototype.constructor = MenuItem;
+
+            // и также метод 'render' нам сюда понадобится
+            MenuItem.prototype.render = function () {
+                res = '<li><a href="' + this.href + '">' + this.name + '</a></li>';
+                return res;
+            };
+
+            // создаем наслденика класса 'Menu'
+            function SubMenu(myId, myClass, myItems) {
+                Menu.call(this);
+                this.id = myId;
+                this.className = myClass;
+                this.items = myItems;
+            }
+
+            SubMenu.prototype = Object.create(Menu.prototype);
+            SubMenu.prototype.constructor = SubMenu;
+
+            SubMenu.prototype.render = function () {
+                var res = '<ul id = "' + this.id + '" class="' + this.className + '">';
+
+                // перебираем items (пункты меню)
+                for (var item in this.items) {
+                    // на каждой итерации проверяем пункт ли это меню, и, если да - вызываем метод 'render'
+                    if (this.items[item] instanceof MenuItem) {
+                        res += this.items[item].render();
+                    } else if (this.items[item] instanceof SubMenu) {
+                        res += '<li>';
+                        res += this.items[item].render();
+                        res += '</li>';
+                    }
+                }
+                // закрываем список ul
+                res += '</ul>';
+                // возвращаем результат
+                return res;
+            };
+
+            /************************GALLERY*****************************/
+
+            function Gallery(myId, myClass, myItems) {
+                Container.call(this);
+                this.id = myId;
+                this.className = myClass;
+                this.items = myItems;
+            }
+
+            Gallery.prototype = Object.create(Container.prototype);
+            Gallery.prototype.constructor = Gallery;
+
+            Gallery.prototype.render = function () {
+                var res = '<article>';
+
+                for (var item in this.items)
+                {
+                    if(this.items[item] instanceof GalleryItem){
+                        res += this.items[item].render();
+                    }
+                }
+                res += '</article>';
+                return res;
+            };
+
+            function GalleryItem(myUrl, myTitle) {
+                Container.call(this);
+                this.className = 'menu-item';
+                this.url = myUrl;
+                this.title = myTitle;
+            }
+
+            GalleryItem.prototype = Object.create(Container.prototype);
+            GalleryItem.prototype.constructor = GalleryItem;
+
+            GalleryItem.prototype.render = function () {
+                var res = '<figure class="'+this.className+'">';
+                res += '<a href="./img/big/' + this.url + '"><img src="./img/small/' + this.url + '" alt="' + this.title + '"></a>';
+                res += '<figcaption>' + this.title + '</figcaption>';
+                res += '</figure>';
+                return res;
+            };
+
+            // содаем меню
+            var menu = new SubMenu('topmenu', 'topmenu', [
+                new MenuItem('/', 'Главная'),
+                new MenuItem('/catalog', 'Каталог'),
+                new MenuItem('/contacts', 'Контакты'),
+                new MenuItem('/userArea', 'Личный кабинет'),
+                new MenuItem('/about', 'О нас'),
+                new SubMenu('submenu', 'submenu', [
+                    new MenuItem('/hr', 'Отдел кадров'),
+                    new MenuItem('/director', 'Директор'),
+                    new MenuItem('/support', 'Техподдержка')
+                ])
+            ]);
+
+            // рендер
+            var nav = document.querySelector('nav');
+            nav.innerHTML = menu.render();
+
+            /****************************AJAX******************************************/
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', './gallery.json', true);
+                xhr.send();
+
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState !=4) return;
+
+                    if(xhr.status != 200){
+                        console.log('Error', xhr.status, xhr.statusText);
+                    } else {
+                        var items = [];
+
+                        var myItems = JSON.parse(xhr.responseText);
+                        for (var i = 0; i < myItems.length; i++)
+                        {
+                            items.push(new GalleryItem(myItems[i].url, myItems[i].title));
+                        }
+
+                        var gallery = new Gallery('my', 'my', items);
+
+                        var menuDom = document.getElementById('gallery');
+                        menuDom.innerHTML = gallery.render();
+                    }
+                };
+        }
+    </script>
+</head>
+<body>
+<nav id="menu"></nav>
+<div id="gallery">
+</div>
+</body>
+</html>
