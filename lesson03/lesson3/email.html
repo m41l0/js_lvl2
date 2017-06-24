@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email</title>
+    <script>
+        //mail.mail.mail@mail.mail.ru
+        var regEmail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/i;
+
+        console.log(regEmail.test('mail.mail@mail.ru'));
+        console.log(regEmail.test('mail@mail.ru'));
+        console.log(regEmail.test('mail765.mail@ail.info'));
+        console.log(regEmail.test('mail.mail@,ail.ru'));
+        console.log(regEmail.test('mail.mailail.ru'));
+        console.log(regEmail.test('mail.mail@ail.ru5'));
+    </script>
+</head>
+<body>
+
+</body>
+</html>
