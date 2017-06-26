@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<images>
+    <image>
+        <title>Изображение 1</title>
+        <original>orig_nms1.jpg</original>
+        <preview>nms1.jpg</preview>
+    </image>
+    <image>
+        <title>Изображение 2</title>
+        <original>orig_nms2.jpg</original>
+        <preview>nms2.jpg</preview>
+    </image>
+    <image>
+        <title>Изображение 3</title>
+        <original>orig_nms3.jpg</original>
+        <preview>nms3.jpg</preview>
+    </image>
+    <image>
+        <title>Изображение 4</title>
+        <original>orig_nms4.jpg</original>
+        <preview>nms4.jpg</preview>
+    </image>
+</images>
