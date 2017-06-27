@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson03</title>
+    <style>
+        #wrapper {
+            margin: 50px;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script>
+        window.onload = function () {
+
+            var textDefault = "'текст', в котором для обозначения 'диалогов' используются 'одинарные' кавычки." +
+                " Придумайте 'шаблон', который меняет 'одинарные' кавычки на 'двойные', aren't don't and AREN'T DON'T.";
+
+            var regExp = /(^|\W)'|'(\W|$)/g;
+
+            document.getElementById('text').innerHTML = textDefault;
+
+            document.getElementById('replace-btn').addEventListener('click', function () {
+
+                var inputText = document.getElementById('text').innerHTML;
+                inputText = inputText.replace(regExp, '$1"$2');
+
+                document.getElementById('text').innerHTML = inputText;
+            });
+
+            document.getElementById('reset-btn').addEventListener('click', function () {
+                document.getElementById('text').innerHTML = textDefault;
+            })
+        }
+    </script>
+</head>
+<body>
+<form action="#">
+    <div id="wrapper">
+        <div class="form-group">
+            <!--<label class="control-label" for="text">Текст</label>-->
+            <p><span class="form-control" id="text"></span></p>
+        </div>
+        <button class="btn btn-default" id="replace-btn">Заменить одинарные кавычки на двойные</button>
+        <button class="btn btn-default" id="reset-btn">Reset</button>
+    </div>
+</form>
+</body>
+</html>
