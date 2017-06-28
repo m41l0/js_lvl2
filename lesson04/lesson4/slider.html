@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Слайдер</title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $slides = $('.slider .slide');
+            var $btnLeft = $('#btnLeft');
+            var $btnRight = $('#btnRight');
+
+            var ACTIVE = 'active';
+            var ACTIVE_DOT = '.' + ACTIVE;
+
+            $slides.not(ACTIVE_DOT).hide();
+
+            var i = 0;
+            setInterval(function () {
+                console.log(++i);
+            }, 500);
+
+            $btnLeft.on('click', function () {
+                if($slides.filter(ACTIVE_DOT).prev().hasClass('slide')){
+                    $slides.filter(ACTIVE_DOT)
+                        .removeClass(ACTIVE)
+                        .slideUp(2000)
+                        .prev()
+                        .addClass(ACTIVE)
+                        .slideDown(2000);
+                } else {
+                    console.log('No slides');
+                }
+            });
+
+            $btnRight.on('click', function () {
+                if($slides.filter(ACTIVE_DOT).next().hasClass('slide')){
+                    $slides.filter(ACTIVE_DOT)
+                        .removeClass(ACTIVE)
+                        .slideUp(2000)
+                        .next()
+                        .addClass(ACTIVE)
+                        .slideDown(2000);
+                } else {
+                    console.log('No slides');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="slider">
+    <div class="slide">
+        <img src="img/1_1.jpg" alt="1">
+    </div>
+    <div class="slide active">
+        <img src="img/1_2.jpg" alt="2">
+    </div>
+    <div class="slide">
+        <img src="img/1_3.jpg" alt="3">
+    </div>
+</div>
+<button id="btnLeft">Влево</button>
+<button id="btnRight">Вправо</button>
+</body>
+</html>

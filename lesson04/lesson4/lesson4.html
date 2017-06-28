@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson4</title>
+    <style>
+        .red {
+            background-color: red;
+        }
+
+        .d1 {
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+            border: 1px solid orangered;
+        }
+    </style>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+        console.log($);
+        console.log(jQuery);
+        //window.onload();
+        $(document).ready(function () {
+            console.log('DOM модель готова!');
+
+            $('p').css('color', 'orange').eq(0).addClass('red');
+            $('.p1').css('color', 'green').css('text-decoration', 'underline');
+            $('#p2').css({
+                color: 'black',
+                backgroundColor: '#ccc',
+                fontSize: '16pt'
+            });
+
+            $(':header').css({
+                fontSize: '18pt'
+            });
+
+            $(':header').each(function (index, item) {
+                console.log(index, item);
+            });
+
+            $('.btn').on('click', function (event) {
+                console.log(event);
+                console.log(this); //this внутри функции не имеет отношения к jQuery
+                $(this).css('color', 'lime');
+                $('.btn').off('click'); //Отвязываем функцию обработчик от кнопки
+            });
+
+            //AJAX
+            $('#btnAjax').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: './data.json',
+                    //async: true,
+                    dataType: 'json',
+                    success: function (data, status) {
+                        console.log(data, status);
+
+                        var $el = $('<p>'+data.tel + '</p><p>'+data.title + '</p>');
+                        $('#tel').html($el);
+                    }
+                });
+            });
+
+            //Работа с прозрачностью
+            var $d1 = $('.d1');
+            var $inputOpacity = $('#i_opacity');
+
+            $('#btn_d1').on('click', function () {
+                $d1.fadeOut(2000, function () {
+                    $d1.fadeIn(2000);
+                });
+            });
+
+            $('#btn_d2').on('click', function () {
+                var opacity = $inputOpacity.val();
+                $d1.fadeTo(2000, opacity);
+            });
+
+        });
+    </script>
+</head>
+<body>
+<p class="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis deserunt distinctio hic ipsum modi nulla obcaecati
+    optio rerum sit tempore! Assumenda, blanditiis hic iure natus optio repudiandae? Aliquid atque, ea?</p>
+<p class="p1">Adipisci, blanditiis eaque enim inventore ipsa iste laboriosam minus modi nesciunt obcaecati rem sequi tenetur unde.
+    Ad enim ex fugit hic libero maxime minima minus molestias nobis quos. Impedit, in.</p>
+<p class="p1">Accusamus adipisci architecto asperiores aut, consectetur consequatur doloremque doloribus ducimus eos et eum illo
+    incidunt laborum maxime nam necessitatibus nihil nobis quaerat quis quod quos similique tenetur totam velit
+    voluptate?</p>
+<p id="p2">Accusamus animi, asperiores delectus dicta dolores eaque et eum excepturi explicabo facere fugiat harum itaque iure
+    magni minus modi molestias neque nihil officiis placeat quam rerum soluta voluptas? Commodi, eveniet?</p>
+<p>Accusamus dolorem eius eligendi excepturi harum illum ipsa ipsum iste minima, molestiae nam, necessitatibus nulla
+    odio quo sint soluta, tempora totam vel velit voluptas! A assumenda aut autem eos mollitia.</p>
+<p>Consequuntur debitis deserunt doloribus ea eligendi eos error est ex explicabo facilis harum impedit incidunt iste
+    laborum laudantium minima nam, nesciunt optio provident quaerat quibusdam similique soluta tempore vel velit!</p>
+<p>Accusantium aliquam blanditiis, consequatur cum deleniti dicta earum error eum excepturi expedita facilis fugit in
+    ipsam itaque, laudantium magnam necessitatibus nesciunt nisi porro, quidem quis reiciendis rerum sapiente temporibus
+    voluptatem!</p>
+<h1>Заголовок 1</h1>
+<h1>Заголовок 2</h1>
+<h1>Заголовок 3</h1>
+
+<button class="btn">Go</button>
+<div id="tel"></div>
+<button id="btnAjax">Получить данные посредством AJAX</button>
+
+<div class="d1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti iusto molestiae, placeat provident reiciendis voluptatibus. Culpa eaque itaque modi nostrum nulla reprehenderit unde? A culpa deleniti dolor laborum nam.</div>
+<button id="btn_d1">Скрыть/Показать</button>
+<input type="number" value="1" id="i_opacity" max="1" min="0" step="0.1">
+<button id="btn_d2">Поменять прозрачность</button>
+</body>
+</html>

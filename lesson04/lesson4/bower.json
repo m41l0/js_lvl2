@@ -1,0 +1,14 @@
+{
+  "name": "lesson4",
+  "authors": [
+    "Igor"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
