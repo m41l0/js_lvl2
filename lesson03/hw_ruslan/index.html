@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ruslan hw</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        var text = 'Пряма речь...';
+
+        console.log(text.replace(/\W'|'\W/g, function (str) {
+            return str.replace(/'/g, '"');
+        }));
+
+
+
+
+
+
+        // 3.
+
+        window.onload = function () {
+
+            var btn = document.getElementById('btn');
+
+            btn.addEventListener('click', function (event) {
+
+                event.preventDefault();
+
+                var name = document.getElementById('name');
+                var tel = document.getElementById('tel');
+                var email = document.getElementById('email');
+                var text = document.getElementById('text');
+                var error = document.getElementById('error');
+
+                var regName = /asa/i;//todo добавить регулярку
+
+                var regTel = /asd/i;//todo добавить регулярку
+
+                var regEmail = /asd/i;//todo добавить регулярку
+
+                var regText = /.{10}/i;//todo добавить регулярку
+                var isError = false;
+
+                function checkError(regExp, id) {
+                    console.log(regExp.test(id.value));
+                    if (regExp.test(id.value)) {
+                        id.setAttribute('class', 'ok');
+                    } else {
+                        id.setAttribute('class', 'red');
+                        isError = true;
+                    }
+                }
+
+                checkError(regName, name);
+                checkError(regTel, tel);
+                checkError(regEmail, email);
+                checkError(regText, text);
+
+                if(isError) {
+                    error.setAttribute('class', 'error');
+                    error.innerHTML = 'Неверно введены данные!';
+                } else {
+                    error.setAttribute('class', 'correct');
+                    error.innerHTML = 'Форма успешно отправлена';
+                }
+
+            })
+        }
+    </script>
+</head>
+<body>
+<p>Первыую часть ДЗ смотреть в консоли!</p>
+<p>Для оправки сообщения, правильно заполните форму!</p>
+<form name="form">
+    <label for="name">Ваше имя</label><br>
+    <input required id="name" type="text" name="tel_num" placeholder="name">
+    <br>
+    <label for="tel">Номер телефона в формате +7(000)000-0000</label><br>
+    <input required id="tel" type="text" name="tel_num" placeholder="tel">
+    <br>
+    <label for="email">Адрес электронной почты</label><br>
+    <input required id="email" type="text" name="email" placeholder="email">
+    <br>
+    <label for="text">Тескт сообщения</label><br>
+    <input required id="text" type="text" name="text" placeholder="text">
+    <br>
+
+    <input id="btn" type="submit" value="Отправить">
+
+    <label id="error" class="hide">Меня нет</label>
+</form>
+</body>
+</html>

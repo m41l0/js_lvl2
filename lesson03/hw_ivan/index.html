@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ivan hw3</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <h2>Задание 1-2</h2>
+    <div class="text-box" id="text-box">
+        <textarea id="input-text" class="reg-text current">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto aspernatur at aut, autem doloribus eligendi excepturi, fugiat hic impedit ipsa labore modi molestias nihil placeat provident quisquam quod voluptate.</textarea>
+        <textarea id="output-text" class="reg-text hidden" disabled></textarea>
+        <span id="input-button" class="switch-button on">оригинальный текст</span>
+        <span id="output-button" class="switch-button off">исправленный текст</span>
+    </div>
+
+<h2>Задание 3</h2>
+    <form action="./index.html" method="GET" name="user-data" id="user-data">
+        <label>Имя: <input type="text" name="name"><span class="error-text"></span></label>
+        <label>Email: <input type="text" name="email"><span class="error-text"></span></label>
+        <label>Телефон: <input type="text" name="phone"><span class="error-text"></span></label>
+        <label for="extra-text">
+            <span>Информация: </span>
+            <textarea name="text" id="extra-text" cols="30" rows="10"></textarea>
+            <span class="error-text"></span>
+        </label>
+        <button type="submit" id="send">Отправить</button>
+    </form>
+</body>
+</html>
