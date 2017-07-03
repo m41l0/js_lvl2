@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson5</title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="Container.js"></script>
+    <script src="Basket.js"></script>
+    <script>
+        $(document).ready(function () {
+            var basket = new Basket();
+            basket.render('#basket_wrapper');
+
+            $('.buyme').on('click', function () {
+                var idProduct = parseInt($(this).attr('id').split('_')[1]);
+                var quantity = 1;
+                var price = parseInt($(this).parent().find('.product-price').text());
+
+                basket.add(idProduct, quantity, price);
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="basket_wrapper"></div>
+
+<div class="good">
+    <p>Товар №123</p>
+    <p>Цена: <span class="product-price">150</span> руб.</p>
+    <button class="buyme" id="good_123" data-product="123">Купить</button>
+</div>
+</body>
+</html>
