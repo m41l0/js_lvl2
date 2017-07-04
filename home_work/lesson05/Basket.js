@@ -75,29 +75,34 @@ Basket.prototype.add = function (idProduct, quantity, price) {
 
     this.totalPrice += price * quantity; //вычисление стоимости
     this.basketItems.push(basketItem); //добавление элемента в массив
-    console.log(this.basketItems);
 
     ////////////////////////////////////////////////////////
-    //
-    var productDiv = document.getElementById('basket_items');
-    // var productDiv2 = $('basket_items');
-    console.log('productDiv - ', productDiv);
-    // console.log('productDiv2 - ', productDiv2);
-    console.log('basketItem - ', basketItem);
-    console.log('basketItem.id_Product - ', basketItem.id_Product);
-    productDiv.appendChild(basketItem);
+    var productDiv = $('#basket_items'); //вспомогательная переменная для блока, куда будем вставлять купленные товары
 
+    var btn_drop = $('<a />', { // "кнопочка" для удаления элемента
+        href: '#',
+        id: 'btn_drop' + idProduct,
+        text: '[х]'
+    });
+    //копируем элемент с товаром и убираем атрибут 'id'
+    var productItem = $('#product_' + basketItem.id_Product).clone().removeAttr('id');
 
-    // productDiv.appendTo(basketDiv);
-    // basketDiv.appendTo(rootElement);
+    btn_drop.appendTo(productItem); // вставляем "кнопочку-удалялку" в элемент с товаром
+
+    productItem.appendTo(productDiv);
     ////////////////////////////////////////////////////////
 
     this.refresh();
+
+    $('#btn_drop' + idProduct).on('click', function () {
+        Basket.prototype.drop(idProduct);
+    });
 };
 
 //TODO: метод для удаления товара из корзины
 Basket.prototype.drop = function (idProduct) {
-
+    // console.log('OK');
+    $('#btn_drop' + idProduct).parent().remove();
 };
 
 //метод для обновление информации на странице

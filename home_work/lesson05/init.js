@@ -10,5 +10,5 @@ $(document).ready(function () {
         var price = parseInt($(this).parent().find('.product-price').text());
 
         basket.add(idProduct, quantity, price);
-    });
+     });
 });
