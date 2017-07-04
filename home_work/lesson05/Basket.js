@@ -75,8 +75,29 @@ Basket.prototype.add = function (idProduct, quantity, price) {
 
     this.totalPrice += price * quantity; //вычисление стоимости
     this.basketItems.push(basketItem); //добавление элемента в массив
+    console.log(this.basketItems);
+
+    ////////////////////////////////////////////////////////
+    //
+    var productDiv = document.getElementById('basket_items');
+    // var productDiv2 = $('basket_items');
+    console.log('productDiv - ', productDiv);
+    // console.log('productDiv2 - ', productDiv2);
+    console.log('basketItem - ', basketItem);
+    console.log('basketItem.id_Product - ', basketItem.id_Product);
+    productDiv.appendChild(basketItem);
+
+
+    // productDiv.appendTo(basketDiv);
+    // basketDiv.appendTo(rootElement);
+    ////////////////////////////////////////////////////////
 
     this.refresh();
+};
+
+//TODO: метод для удаления товара из корзины
+Basket.prototype.drop = function (idProduct) {
+
 };
 
 //метод для обновление информации на странице

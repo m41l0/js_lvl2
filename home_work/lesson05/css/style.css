@@ -1,0 +1,30 @@
+#main_wrapper {
+    /*display: flex;*/
+    /*flex-grow: 2;*/
+    /*justify-content: space-between;*/
+    padding: 15px 20px 5px;
+}
+#basket_wrapper {
+    /*display: inline-block;*/
+    width: 40%;
+    margin: 0 0 40px 0;
+    padding: 15px 20px 5px;
+    border: 1px solid red;
+}
+#goods_wrapper {
+    width: 40%;
+    display: flex;
+    padding: 15px 20px 5px;
+    justify-content: space-between;
+    border: 1px solid green;
+}
+.good {
+    /*display: flex;*/
+    margin: 5px;
+    padding:5px;
+    border: 1px dashed blue;
+}
+.good p {
+    margin:0;
+    padding:0;
+}
