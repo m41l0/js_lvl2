@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson5</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="script.js" charset="utf-8"></script>
+</head>
+<body>
+
+<h1>Урок 5</h1>
+
+<div class="container">
+
+
+    <div class="good">
+        <div class="product-image"></div>
+        <h3>Товар №123</h3>
+        <p>Цена: <span class="product-price">150</span> руб.</p>
+        <button class="buyme" id="good_123" data-productId="123" data-price="150">Купить</button>
+        <form class="review-form" action="./index.html" id="review_123" data-productId="123">
+            <input type="hidden" name="userId" value="42">
+            <label>
+                <strong>Отзыв:</strong><br>
+                <textarea name="reviewText"></textarea><br>
+            </label>
+            <button type="submit" class="send">добавить</button>
+        </form>
+        <ul class="reviews" id="review-list_123">
+            <li>
+                <strong>Пользователь 42</strong>
+                <p>review text</p>
+                <a href="#" data-reviewId="7">одобрить</a>&nbsp;|&nbsp;<a href="#" data-reviewId="7">удалить</a>
+            </li>
+        </ul>
+    </div>
+    <div id="basket_wrapper"></div>
+</div>
+</body>
+</html>

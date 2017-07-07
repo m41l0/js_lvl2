@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery UI</title>
+
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/base/all.css">
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/ui-darkness/jquery-ui.min.css">
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/ui-darkness/theme.css">
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.draggable').draggable({
+                //axis: 'y', //x
+                scroll: true,
+                cursor: 'move',
+                cursorAt: {
+                    top: 40,
+                    left: 40
+                },
+                //revert: true,
+                //helper: 'clone',
+                //containment: 'parent'
+                containment: '.parent-draggable'
+
+            });
+
+            //События
+
+            var $startCounter = $('#e-start'),
+                $dragCounter = $('#e-drag'),
+                $stopCounter = $('#e-stop'),
+                counts = [0, 0, 0];
+
+            function updateCounter($eventCounter, newCount) {
+                if(!$eventCounter.hasClass('ui-state-hover')){
+                    $eventCounter.addClass('ui-state-hover')
+                        .siblings().removeClass('ui-state-hover');
+                }
+
+                $('span.count', $eventCounter).text(newCount);
+            }
+
+            $('#draggable').draggable({
+                start: function () {
+                    counts[0]++;
+                    updateCounter($startCounter, counts[0]);
+                },
+                drag: function () {
+                    counts[1]++;
+                    updateCounter($dragCounter, counts[1]);
+                },
+                stop: function () {
+                    counts[2]++;
+                    updateCounter($stopCounter, counts[2]);
+                }
+            });
+
+            //Календарь
+            $('#data').datepicker({
+                dateFormat: "dd.mm.yy",
+                dayNamesMin: [ "ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ" ],
+                firstDay: 1
+            });
+        });
+    </script>
+    <style>
+        .draggable {
+            width: 100px;
+            height: 100px;
+            background-color: lightgreen;
+            border: 1px solid green;
+            border-radius: 10px;
+        }
+
+        .parent-draggable {
+            width: 500px;
+            height: 500px;
+            background-color: orange;
+            border: 1px solid orangered;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="parent-draggable">
+    <div class="draggable">
+
+    </div>
+</div>
+
+<div id="draggable" class="ui-widget ui-widget-content">
+    <ul class="ui-helper-reset">
+        <li id="e-start" class="ui-state-default ui-corner-all">
+            Start: <span class="count">0</span>
+        </li>
+        <li id="e-drag" class="ui-state-default ui-corner-all">
+            Draggable: <span class="count">0</span>
+        </li>
+        <li id="e-stop" class="ui-state-default ui-corner-all">
+            Stop: <span class="count">0</span>
+        </li>
+    </ul>
+</div>
+
+<input type="text" id="data">
+</body>
+</html>

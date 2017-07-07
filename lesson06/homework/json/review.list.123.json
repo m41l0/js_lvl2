@@ -1,0 +1,16 @@
+[
+    {
+        "comments": [
+            {
+                "id_comment":"13",
+                "id_user":"56",
+                "text":"text 1"
+            },
+            {
+                "id_comment":"16",
+                "id_user":"77",
+                "text":"text 2"
+            }
+        ]
+    }
+]

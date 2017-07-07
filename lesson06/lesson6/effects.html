@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery UI effects</title>
+
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/base/all.css">
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/ui-darkness/jquery-ui.min.css">
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/ui-darkness/theme.css">
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#btn1').on('click', function () {
+               $('#test').hide($('#effect').val(), {}, 2000);
+            });
+
+            $('#btn2').on('click', function () {
+                $('#test').show($('#effect').val(), {}, 2000);
+            });
+        });
+    </script>
+    <style>
+        #test {
+            padding: 10px;
+            width: 400px;
+            height: 200px;
+            border: 1px solid green;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="test" class="ui-widget ui-widget-content">
+    <h2>Элемент</h2>
+    <p>Этот элемент помогает тестировать эффекты jQuery UI</p>
+</div>
+
+<p><label for="effect">Выберите эффект из списка:</label></p>
+<select name="effect" id="effect">
+    <option value="blind">Ослепление</option>
+    <option value="bounce">Подпрыгивание</option>
+    <option value="clip">Обрезание</option>
+    <option value="drop">Падение</option>
+    <option value="explode">Взрыв</option>
+    <option value="fade">Исчезновение</option>
+    <option value="fold">Складывание</option>
+    <option value="highlight">Подсветка</option>
+    <option value="puff">Рассеивание</option>
+    <option value="pulsate">Пульсирование</option>
+    <option value="shake">Тряска</option>
+    <option value="slide">Выскальзывание</option>
+</select>
+<p>Выберите желаемое действие:</p>
+<input type="button" id="btn1" value="Скрыть элемент">
+<input type="button" id="btn2" value="Показать элемент">
+</body>
+</html>

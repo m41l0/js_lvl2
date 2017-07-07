@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    width: 100%;
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.good {
+    background-color: lightyellow;
+    width: 300px;
+    padding-bottom: 12px;
+    float: left;
+}
+
+.product-image {
+    background-color: lightgrey;
+    border: 2px solid black;
+    height: 200px;
+    width: 150px;
+    float: left;
+    margin: 8px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    padding-top: 8px;
+}
+
+.product-price {
+    font-style: italic;
+}
+
+.review-form {
+    clear: both;
+}
+
+.review-form textarea {
+    width: 98%;
+    margin: 1%;
+    box-sizing: border-box;
+    height: 100px;
+}
+
+.review-form button {
+    float: right;
+    margin: 4px;
+}
+
+.good ul, .good li {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px;
+    background-color: lightgreen;
+    border: 1px solid darkgreen;
+    margin: 4px;
+    color: black;
+}
+
+.good li {
+    background-color: lightblue;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: .5em;
+    width: 98%;
+    margin: 1%;
+}
+
+.good ul p {
+    background-color: white;
+    padding: .5em;
+}
+
+#basket_wrapper {
+    float: right;
+    background-color: lavenderblush;
+    padding: 12px;
+}
+
+#basket_wrapper p {
+    text-align: right;
+}
+
+#items-list span {
+    padding: 12px;
+    display: inline-block;
+    border-radius: 100%;
+    background-color: white;
+    height: 15px;
+    width: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+h4 {
+    text-align: center;
+}
